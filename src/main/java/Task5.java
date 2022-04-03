@@ -1,67 +1,56 @@
-import java.util.Map;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.Arrays;
+import java.util.Locale;
 
 /**
- * 6.	Створіть програму для шифрування\розшифровки тексту методом Цезаря.
+ * 5.	Створіть програму для шифрування\розшифровки тексту методом Цезаря.
  *      У ньому ключем є ціле число, а шифрування\ розшифровка полягає в
  *      сумовуванні\відніманні кодів символів відкритого
  *      тексту\криптотексту з ключем.
  */
 public class Task5 {
 
+    public static final String ALPHABET  = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя";
+
     public static void execute(String[] args) {
-        var numbers = Task5.inputNumbers();
-        var results = Task5.getMinimum(numbers);
-        Task5.printMinimum(results);
+        var cryptoKey = Integer.parseInt(args[1]);
+        var text = String.join(" ",Arrays.stream(args).toList().subList(2, args.length));
+        System.out.println("[TASK5] Оригінальне повідомлення: "+text);
+        var encryptedText = encryptText(text,cryptoKey);
+        System.out.println("[TASK5] Зашифроване повідомлення з ключем ("+cryptoKey+"): "+encryptedText);
+        var decryptedText = decryptText(encryptedText,cryptoKey);
+        System.out.println("[TASK5] Розшифроване повідомлення з ключем ("+cryptoKey+"): "+decryptedText);
     }
 
-    public static boolean isIndexLocalMinimum(int index, int[] numbers) {
-        if (numbers.length == 0) {
-            return false;
-        }
-        if (numbers.length == 1) {
-            return true;
-        }
-
-        int current = numbers[index];
-        if (index == 0) {
-            return current < numbers[index + 1];
-        }
-        if (index == numbers.length - 1) {
-            return current < numbers[index - 1];
-        }
-
-        int right = numbers[index + 1];
-        int left = numbers[index - 1];
-        return current < left && current < right;
+    public static String encryptText(String text, int key){
+        return cryptText(text, key,true);
     }
 
-    public static Map<Integer, Integer> getMinimum(int[] numbers) {
-        return IntStream
-                .range(0, numbers.length)
-                .boxed()
-                .filter(i -> isIndexLocalMinimum(i, numbers))
-                .collect(Collectors.toMap(i -> i, i -> numbers[i]));
+    public static String decryptText(String text, int key){
+        return cryptText(text, key,false);
     }
 
-    public static void printMinimum(Map<Integer, Integer> minimums) {
-        minimums.forEach((index, value) -> {
-            System.out.println("Task 6: Element value = " + value + " , Index = " + index);
-        });
-    }
-
-    public static int[] inputNumbers() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Task 6: Enter size of array");
-        int size = scanner.nextInt();
-        int[] numbers = IntStream.range(0, size).toArray();
-        System.out.println("Task 6: Enter " + size + " number(s)");
-        for (int i = 0; i < size; i++) {
-            numbers[i] = scanner.nextInt();
+    private static String cryptText(String text, int key, boolean isEncrypt){
+        StringBuilder codedText = new StringBuilder();
+        for (var i = 0; i < text.length(); i++){
+            String letter = String.valueOf(text.charAt(i));
+            var index = ALPHABET.indexOf(letter.toLowerCase(Locale.ROOT));
+            if (index == -1){
+                codedText.append(letter);
+            }else {
+                var cryptIndex = isEncrypt ? (index + key) : (index - key);
+                cryptIndex = cryptIndex % ALPHABET.length();
+                if (cryptIndex < 0){
+                    cryptIndex = ALPHABET.length()+cryptIndex;
+                }
+                String cryptoLetter = String.valueOf(ALPHABET.charAt(cryptIndex));
+                if (Character.isLowerCase(letter.charAt(0))){
+                    codedText.append(cryptoLetter);
+                }else{
+                    codedText.append(cryptoLetter.toUpperCase(Locale.ROOT));
+                }
+            }
         }
-
-        return numbers;
+        return codedText.toString();
     }
+
 }
