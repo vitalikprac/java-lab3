@@ -24,10 +24,9 @@ public class Task25 {
     }
 
     public static void printTexts(List<String> texts) {
-        for (var text : texts) {
-            System.out.println("[TASK25] " + text);
+        for (int i =0;i<texts.size(); i++) {
+            System.out.println("[TASK25] Argument " + (i+1) + " value: " + texts.get(i));
         }
-
     }
 
     public static String getLargestText(List<String> texts) {

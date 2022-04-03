@@ -55,7 +55,7 @@ public class Task25Test {
         Task25.execute(new String[]{"task25", "a"});
         Assert.assertEquals("""
                 [TASK25] Count of arguments: 1\r
-                [TASK25] a\r
+                [TASK25] Argument 1 value: a\r
                 [TASK25] The largest text: a\r
                 """, outContent.toString());
     }
@@ -65,10 +65,10 @@ public class Task25Test {
         Task25.execute(new String[]{"task25", "a", "the_largest", "c", "not"});
         Assert.assertEquals("""
                 [TASK25] Count of arguments: 4\r
-                [TASK25] a\r
-                [TASK25] the_largest\r
-                [TASK25] c\r
-                [TASK25] not\r
+                [TASK25] Argument 1 value: a\r
+                [TASK25] Argument 2 value: the_largest\r
+                [TASK25] Argument 3 value: c\r
+                [TASK25] Argument 4 value: not\r
                 [TASK25] The largest text: the_largest\r
                 """, outContent.toString());
     }
