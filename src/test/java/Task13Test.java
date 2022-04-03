@@ -3,55 +3,55 @@ import org.junit.Test;
 
 
 public class Task13Test {
-    private static final String KEY = "сйешмґциюжївзблчпщактєгхфуьянроід";
+    private static final String KEY = "azwybtmjnlurkhicvodsfegqpx";
 
     @Test
     public void encryptSomeText() {
-        var encryptedText = Task13.encryptText("Перевірка шифрування",KEY);
-        Assert.assertEquals("Кцтцевтлс нїфтхесщщд", encryptedText);
+        var encryptedText = Task13.encryptText("Encrypt test",KEY);
+        Assert.assertEquals("Bhwopcs sbds", encryptedText);
     }
 
     @Test
     public void encryptAlphabet() {
-        var encryptedText = Task13.encryptText("абвгґдеєжзиіїйклмнопрстуфхцчшщьюя",KEY);
+        var encryptedText = Task13.encryptText("abcdefghijklmnopqrstuvwxyz",KEY);
         Assert.assertEquals(KEY, encryptedText);
     }
 
     @Test
     public void encryptSameKey() {
-        var encryptedText = Task13.encryptText("Привіт","абвгґдеєжзиіїйклмнопрстуфхцчшщьюя");
-        Assert.assertEquals("Привіт", encryptedText);
+        var encryptedText = Task13.encryptText("Hello","abcdefghijklmnopqrstuvwxyz");
+        Assert.assertEquals("Hello", encryptedText);
     }
 
     @Test
     public void encryptTextWithSymbols() {
-        var encryptedText = Task13.encryptText("Привіт ;123456789_$^-,,,,...",KEY);
-        Assert.assertEquals("Ктїевг ;123456789_$^-,,,,...", encryptedText);
+        var encryptedText = Task13.encryptText("Hello ;123456789_$^-,,,,...",KEY);
+        Assert.assertEquals("Jbrri ;123456789_$^-,,,,...", encryptedText);
     }
 
 
     @Test
     public void decryptSomeText() {
-        var decryptedText = Task13.decryptText("Кцтцевтлс нїфтхесщщд",KEY);
-        Assert.assertEquals("Перевірка шифрування", decryptedText);
+        var decryptedText = Task13.decryptText("Bhwopcs sbds",KEY);
+        Assert.assertEquals("Encrypt test", decryptedText);
     }
 
     @Test
     public void decryptAlphabet() {
         var decryptedText = Task13.decryptText(KEY,KEY);
-        Assert.assertEquals("абвгґдеєжзиіїйклмнопрстуфхцчшщьюя", decryptedText);
+        Assert.assertEquals("abcdefghijklmnopqrstuvwxyz", decryptedText);
     }
 
     @Test
     public void decryptSameKey() {
-        var decryptedText = Task13.decryptText("Привіт","абвгґдеєжзиіїйклмнопрстуфхцчшщьюя");
-        Assert.assertEquals("Привіт", decryptedText);
+        var decryptedText = Task13.decryptText("Hello","abcdefghijklmnopqrstuvwxyz");
+        Assert.assertEquals("Hello", decryptedText);
     }
 
     @Test
     public void decryptTextWithSymbols() {
-        var decryptedText = Task13.decryptText("Ктїевг ;123456789_$^-,,,,...",KEY);
-        Assert.assertEquals("Привіт ;123456789_$^-,,,,...", decryptedText);
+        var decryptedText = Task13.decryptText("Jbrri ;123456789_$^-,,,,...",KEY);
+        Assert.assertEquals("Hello ;123456789_$^-,,,,...", decryptedText);
     }
 
 }

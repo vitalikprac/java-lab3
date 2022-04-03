@@ -6,21 +6,21 @@ import java.util.*;
  *      символи в якому представлені відповідно до ключа шифрування.
  */
 public class Task13 {
-    public static final String ALPHABET  = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя";
+    public static final String ALPHABET  = "abcdefghijklmnopqrstuvwxyz";
 
     public static void execute(String[] args) {
         var cryptoKey = args[1];
         var keySet = new HashSet<>(cryptoKey.chars().mapToObj(e -> (char) e).toList());
         if (cryptoKey.length() != ALPHABET.length() || keySet.size() != ALPHABET.length()){
-            System.out.println("[TASK13] Неправильний ключ!");
+            System.out.println("[TASK13] Incorrect key!");
             return;
         }
         var text = String.join(" ", Arrays.stream(args).toList().subList(2, args.length));
-        System.out.println("[TASK13] Оригінальне повідомлення: "+text);
+        System.out.println("[TASK13] Original message: "+text);
         var encryptedText = encryptText(text,cryptoKey);
-        System.out.println("[TASK13] Зашифроване повідомлення з ключем ("+cryptoKey+"): "+encryptedText);
+        System.out.println("[TASK13] Encrypted message with key ("+cryptoKey+"): "+encryptedText);
         var decryptedText = decryptText(encryptedText,cryptoKey);
-        System.out.println("[TASK13] Розшифроване повідомлення з ключем ("+cryptoKey+"): "+decryptedText);
+        System.out.println("[TASK13] Decrypted message with key ("+cryptoKey+"): "+decryptedText);
     }
 
     public static String encryptText(String text, String key){

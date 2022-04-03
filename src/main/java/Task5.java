@@ -9,16 +9,16 @@ import java.util.Locale;
  */
 public class Task5 {
 
-    public static final String ALPHABET  = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя";
+    public static final String ALPHABET  = "abcdefghijklmnopqrstuvwxyz";
 
     public static void execute(String[] args) {
         var cryptoKey = Integer.parseInt(args[1]);
         var text = String.join(" ",Arrays.stream(args).toList().subList(2, args.length));
-        System.out.println("[TASK5] Оригінальне повідомлення: "+text);
+        System.out.println("[TASK5] Original text: "+text);
         var encryptedText = encryptText(text,cryptoKey);
-        System.out.println("[TASK5] Зашифроване повідомлення з ключем ("+cryptoKey+"): "+encryptedText);
+        System.out.println("[TASK5] Encrypted text with key ("+cryptoKey+"): "+encryptedText);
         var decryptedText = decryptText(encryptedText,cryptoKey);
-        System.out.println("[TASK5] Розшифроване повідомлення з ключем ("+cryptoKey+"): "+decryptedText);
+        System.out.println("[TASK5] Decrypted text with key ("+cryptoKey+"): "+decryptedText);
     }
 
     public static String encryptText(String text, int key){
